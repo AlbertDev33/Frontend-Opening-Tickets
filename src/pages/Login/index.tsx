@@ -1,25 +1,43 @@
 import React from 'react';
-import { FiLogIn } from 'react-icons/fi';
+import { Link } from 'react-router-dom';
+import { FiLogIn, FiMail, FiLock } from 'react-icons/fi';
+import { Form } from '@unform/web';
 
 import { Container, Content, Background } from './styles';
 
-const Login: React.FC = () => (
-  <Container>
-    <Content>
-      <form>
-        <h1>Faça seu login</h1>
+import Input from '../../components/Input';
+import Button from '../../components/Button';
 
-        <input placeholder="E-mail" />
+const Login: React.FC = () => {
+  function handleSubmit(data: object): void {
+    console.log(data);
+  }
 
-        <input type="password" placeholder="Senha" />
+  return (
+    <Container>
+      <Content>
+        <Form onSubmit={handleSubmit}>
+          <h1>Faça seu login</h1>
 
-        <button type="submit">Entrar</button>
-      </form>
-      <FiLogIn />
-      <a href="/">Criar conta</a>
-    </Content>
-    <Background />
-  </Container>
-);
+          <Input name="email" icon={FiMail} placeholder="E-mail" />
+          <Input
+            name="password"
+            icon={FiLock}
+            type="password"
+            placeholder="Senha"
+          />
+
+          <Button type="submit">Entrar</Button>
+        </Form>
+
+        <Link to="/register">
+          <FiLogIn />
+          Criar conta
+        </Link>
+      </Content>
+      <Background />
+    </Container>
+  );
+};
 
 export default Login;
