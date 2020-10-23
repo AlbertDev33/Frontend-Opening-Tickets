@@ -1,5 +1,5 @@
 import React, { useCallback, useContext, useRef } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import { FiLogIn, FiMail, FiLock } from 'react-icons/fi';
 import * as Yup from 'yup';
 import { Form } from '@unform/web';
@@ -20,9 +20,9 @@ interface LoginFormData {
 
 const Login: React.FC = () => {
   const formRef = useRef<FormHandles>(null);
-  const { user, login } = useContext(AuthContext);
+  const history = useHistory();
 
-  console.log(user);
+  const { logIn } = useContext(AuthContext);
 
   const handleSubmit = useCallback(
     async (data: LoginFormData) => {
@@ -40,16 +40,18 @@ const Login: React.FC = () => {
           abortEarly: false,
         });
 
-        login({
+        logIn({
           email: data.email,
           password: data.password,
         });
+
+        history.push('/dashboard');
       } catch (err) {
         const errors = getValidationErrors(err);
         formRef.current?.setErrors(errors);
       }
     },
-    [login],
+    [logIn, history],
   );
 
   return (
