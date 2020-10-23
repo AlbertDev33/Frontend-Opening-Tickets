@@ -5,6 +5,11 @@ export const Container = styled.div`
 
   display: flex;
   justify-content: center;
+
+  h1 {
+    font-size: 16px;
+    height: 16px;
+  }
 `;
 
 export const Content = styled.div`
@@ -36,6 +41,7 @@ export const Content = styled.div`
 
 export const Tickets = styled.div`
   display: flex;
+  flex-direction: column;
   width: 100%;
   max-width: 60%;
   justify-content: center;
