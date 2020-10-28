@@ -6,7 +6,7 @@ import { Form } from '@unform/web';
 import { FormHandles } from '@unform/core';
 
 import { AuthContext } from '../../hook/AuthContext';
-import getValidationErrors from '../../utils/getValidationErros';
+import getValidationErrors from '../../utils/getValidationErrors';
 
 import { Container, Content, Background } from './styles';
 
