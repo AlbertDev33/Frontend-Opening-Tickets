@@ -6,6 +6,7 @@ import Route from './Route';
 import Login from '../pages/Login';
 import Register from '../pages/Register';
 import Dashboard from '../pages/Dashboard';
+import Tickets from '../pages/Tickets';
 
 const Routes: React.FC = () => (
   <Switch>
@@ -13,6 +14,7 @@ const Routes: React.FC = () => (
     <Route path="/register" component={Register} />
 
     <Route path="/dashboard" component={Dashboard} isPrivate />
+    <Route path="/tickets" component={Tickets} isPrivate />
   </Switch>
 );
 
