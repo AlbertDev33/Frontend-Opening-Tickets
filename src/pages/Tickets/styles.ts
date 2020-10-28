@@ -19,28 +19,18 @@ export const Content = styled.div`
   width: 100%;
   max-width: 90%;
 
+  h1 {
+    color: #ecf0f1;
+  }
+
   form {
     margin: 80px 0;
-    width: 340px;
+    width: 450px;
+
     text-align: center;
 
-    textarea {
-      height: 160px;
-      background: #ecf0f1;
-      border-radius: 10px;
-      padding: 16px;
-      width: 100%;
-      margin-top: 10px;
-      resize: none;
-      font-family: 'Open Sans', sans-serif;
-      font-weight: 400;
-      font-size: 16px;
-
-      border: 2px solid #ecf0f1;
-      color: #666360;
-
-      display: flex;
-      align-items: center;
+    button {
+      width: 340px;
     }
   }
 
