@@ -56,6 +56,7 @@ const Ticket: React.FC = () => {
     <Container>
       <Background>
         <Content>
+          <h1>Cadastro de tickets</h1>
           <Form ref={formRef} onSubmit={handleSubmit}>
             <Input name="subject" placeholder="Título" />
             <TextArea name="message" placeholder="Mensagem" />
