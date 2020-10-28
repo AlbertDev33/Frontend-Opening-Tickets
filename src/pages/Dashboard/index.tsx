@@ -34,7 +34,7 @@ const Dashboard: React.FC = () => {
   }, []);
 
   useEffect(() => {
-    api.get('/tickets').then((response) => {
+    api.get('/tickets').then(response => {
       setTickets(response.data);
     });
   }, []);
@@ -42,6 +42,7 @@ const Dashboard: React.FC = () => {
   return (
     <Container>
       <h1>Dashboard. Bem vindo {user.name}</h1>
+      <Link to="/tickets">Criar um chamado</Link>
       <Content>
         <Form ref={formRef} onSubmit={handleSubmit}>
           <Input name="pesquisar" placeholder="Digite aqui" />
@@ -50,7 +51,7 @@ const Dashboard: React.FC = () => {
         </Form>
 
         <Tickets>
-          {tickets.map((ticket) => (
+          {tickets.map(ticket => (
             <Link key={ticket.id} to="/">
               <div>
                 <strong>{ticket.id}</strong>
