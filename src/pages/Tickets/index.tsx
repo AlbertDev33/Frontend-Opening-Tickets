@@ -4,6 +4,7 @@ import { Form } from '@unform/web';
 import { FormHandles } from '@unform/core';
 import * as Yup from 'yup';
 
+import { FiArrowLeft } from 'react-icons/fi';
 import getValidationErrors from '../../utils/getValidationErrors';
 
 import { Container, Content, Background } from './styles';
@@ -63,7 +64,9 @@ const Ticket: React.FC = () => {
 
             <Button type="submit">Cadastrar</Button>
           </Form>
-          <Link to="/">Página Inicial</Link>
+          <Link to="/">
+            <FiArrowLeft size={16} /> Página Inicial
+          </Link>
         </Content>
       </Background>
     </Container>
