@@ -71,25 +71,19 @@ deixa o código css muito mais limpo e fácil de ler.
 ## Exemplos do projeto
 
 #### Tela de login
-![login](https://ibb.co/fvcg2xn)
-
-<p align="center">
-    <img src="https://ibb.co/fvcg2xn">
-</p>
-<br>
-
+[!login](https://ibb.co/fvcg2xn)
 
 #### Dashboard da aplicação
-![dashboard](https://ibb.co/FYS3GCW)
+[!dashboard](https://ibb.co/FYS3GCW)
 
 #### Cadastro de usuário
-![cadastro_usuario](https://ibb.co/bgZqfHc)
+[!cadastro_usuario](https://ibb.co/bgZqfHc)
 
 #### Cadastro de tickets
-![cadastro_tickets](https://ibb.co/ynH8gM2)
+[!cadastro_tickets](https://ibb.co/ynH8gM2)
 
 #### Edição de tickets
-![edicao_tickets](https://ibb.co/JsrjvQJ)
+[!edicao_tickets](https://ibb.co/JsrjvQJ)
 
 
 ## Como executar o projeto
