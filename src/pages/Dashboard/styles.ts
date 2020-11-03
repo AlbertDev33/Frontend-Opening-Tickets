@@ -1,15 +1,49 @@
 import styled from 'styled-components';
 
-export const Container = styled.div`
-  height: 100vh;
-
+export const HeaderContainer = styled.div`
   display: flex;
   justify-content: center;
+  background-color: #f1f1f1;
+`;
+
+export const Header = styled.header`
+  display: flex;
+  width: 90vw;
+  height: 100px;
+`;
+
+export const HeaderContent = styled.div`
+  display: flex;
+  width: 100%;
+  align-items: center;
+
+  justify-content: space-between;
 
   h1 {
-    font-size: 16px;
-    height: 16px;
+    font-size: 18px;
+    color: #312e38;
+    font-weight: 600;
   }
+
+  button {
+    border: 0;
+    background: transparent;
+
+    svg {
+      color: #312e38;
+      transition: color 0.2s;
+
+      &:hover {
+        color: #6ec4db;
+      }
+    }
+  }
+`;
+
+export const Container = styled.div`
+  height: 100vh;
+  display: flex;
+  justify-content: center;
 `;
 
 export const Content = styled.div`
@@ -22,9 +56,10 @@ export const Content = styled.div`
 
   form {
     width: 60%;
-    margin: 80px 0;
+    margin: 50px 0;
     display: flex;
     align-items: center;
+    justify-content: center;
 
     input {
       flex: 1;
@@ -36,6 +71,16 @@ export const Content = styled.div`
       margin-top: 0;
       margin-left: 20px;
     }
+  }
+
+  > a {
+    margin-bottom: 40px;
+    text-decoration: none;
+    color: #312e38;
+    font-weight: 600;
+    padding: 10px;
+    background-color: #6ec4db;
+    border-radius: 10px;
   }
 `;
 
@@ -64,6 +109,10 @@ export const Tickets = styled.div`
 
     & + a {
       margin-top: 16px;
+    }
+
+    :last-child {
+      margin-bottom: 50px;
     }
 
     div {
