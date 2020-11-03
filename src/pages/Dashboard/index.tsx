@@ -6,16 +6,30 @@ import React, {
   useState,
 } from 'react';
 import { Link } from 'react-router-dom';
-import { FiChevronRight } from 'react-icons/fi';
+import { FiChevronRight, FiPower } from 'react-icons/fi';
 import { Form } from '@unform/web';
 import { FormHandles } from '@unform/core';
+import * as Yup from 'yup';
 
 import api from '../../services/api';
-import { Container, Content, Tickets } from './styles';
+
+import {
+  Container,
+  HeaderContainer,
+  Header,
+  HeaderContent,
+  Content,
+  Tickets,
+} from './styles';
 
 import Button from '../../components/Button';
 import Input from '../../components/Input';
 import { AuthContext } from '../../hook/AuthContext';
+import getValidationErrors from '../../utils/getValidationErrors';
+
+interface FindTicketData {
+  ticket_id: string;
+}
 
 interface FindFormData {
   id: string;
@@ -25,12 +39,44 @@ interface FindFormData {
 
 const Dashboard: React.FC = () => {
   const formRef = useRef<FormHandles>(null);
-  const { user } = useContext(AuthContext);
+  const { user, logOut } = useContext(AuthContext);
 
   const [tickets, setTickets] = useState<FindFormData[]>([]);
+  const [ticketId, setTicketId] = useState<FindTicketData>(
+    {} as FindTicketData,
+  );
+  const [display, setDisplay] = useState(true);
 
-  const handleSubmit = useCallback(async () => {
-    await api.get('/tickets');
+  const handleSubmit = useCallback(async ({ ticket_id }: FindTicketData) => {
+    try {
+      formRef.current?.setErrors({});
+
+      const schema = Yup.object().shape({
+        ticket_id: Yup.string()
+          .min(36, 'Insira um id válido')
+          .max(36, 'Insira um id válido')
+          .required('Insira um id válido'),
+      });
+
+      await schema.validate(
+        { ticket_id },
+        {
+          abortEarly: false,
+        },
+      );
+
+      await api.get<FindFormData>(`tickets/${ticket_id}`);
+
+      setDisplay(false);
+
+      setTicketId({ ticket_id });
+    } catch (err) {
+      if (err instanceof Yup.ValidationError) {
+        const error = getValidationErrors(err);
+
+        formRef.current?.setErrors(error);
+      }
+    }
   }, []);
 
   useEffect(() => {
@@ -40,30 +86,49 @@ const Dashboard: React.FC = () => {
   }, []);
 
   return (
-    <Container>
-      <h1>Dashboard. Bem vindo {user.name}</h1>
-      <Link to="/tickets">Criar um chamado</Link>
-      <Content>
-        <Form ref={formRef} onSubmit={handleSubmit}>
-          <Input name="pesquisar" placeholder="Digite aqui" />
+    <>
+      <HeaderContainer>
+        <Header>
+          <HeaderContent>
+            <h1>Bem vindo(a) {user.name}</h1>
+            <button type="button" onClick={logOut}>
+              <FiPower size={20} />
+            </button>
+          </HeaderContent>
+        </Header>
+      </HeaderContainer>
+      <Container>
+        <Content>
+          <Form ref={formRef} onSubmit={handleSubmit}>
+            <Input name="ticket_id" placeholder="Digite aqui o id do ticket" />
 
-          <Button type="submit">Pesquisar</Button>
-        </Form>
+            <Button type="submit">Pesquisar</Button>
+          </Form>
 
-        <Tickets>
-          {tickets.map(ticket => (
-            <Link key={ticket.id} to="/">
-              <div>
-                <strong>{ticket.id}</strong>
-                <p>{ticket.subject}</p>
-              </div>
+          <Link to="/tickets">Criar um chamado</Link>
+          <Tickets>
+            {display ? (
+              tickets.map(ticket => (
+                <Link key={ticket.id} to={`/edit/${ticket.id}`}>
+                  <div>
+                    <strong>{ticket.id}</strong>
+                    <p>{ticket.subject}</p>
+                  </div>
 
-              <FiChevronRight size={20} />
-            </Link>
-          ))}
-        </Tickets>
-      </Content>
-    </Container>
+                  <FiChevronRight size={20} />
+                </Link>
+              ))
+            ) : (
+              <Link key={ticketId.ticket_id} to={`/edit/${ticketId.ticket_id}`}>
+                <div>
+                  <strong>{ticketId.ticket_id}</strong>
+                </div>
+              </Link>
+            )}
+          </Tickets>
+        </Content>
+      </Container>
+    </>
   );
 };
 
