@@ -1,6 +1,4 @@
-# Desafio Técnico - Frontend Cirrus
-
-## Projeto em cumprimento ao desafio Alterdada. Trata-se da aplicação de nível INICIANTE.
+# Sistama de abertura de tickets
 
 ### Bibliotecas do projeto
 
@@ -68,16 +66,23 @@ deixa o código css muito mais limpo e fácil de ler.
 ├── tsconfig.json
 └── yarn.lock
 
-## Funcionalidades desenvolvidas
+## Exemplos do projeto
 
-- Tela de login e cadastro funcional
-- Ao realizar o cadastro, já é possível realizar o login na aplicação
-- Ao realizar o login, o usuário terá um painel contendo todos os tíkets abertos por ele (se houverem).
+#### Tela de login
+![](https://ibb.co/fvcg2xn)
 
-Todas as telas após o login na aplicação estão em volta de um contexto, para não ocorrer de um usuário não
-autorizado realizar login na aplicação.
+#### Dashboard da aplicação
+![](https://ibb.co/FYS3GCW)
 
-Não consegui em tempo hábil desenvolver as outras funcionalidades no frontend.
+#### Cadastro de usuário
+![](https://ibb.co/bgZqfHc)
+
+#### Cadastro de tickets
+![](https://ibb.co/ynH8gM2)
+
+#### Edição de tickets
+![](https://ibb.co/JsrjvQJ)
+
 
 ## Como executar o projeto
 
@@ -86,6 +91,3 @@ Não consegui em tempo hábil desenvolver as outras funcionalidades no frontend.
 - Rode o comando yarn start (o projeto está sendo gerado na porta 3000);
 - Para criar um novo usuário, o bakend deverá estar rodando (está configurado para subir na porta 3333)
 - Ao criar um usuário, já possível realizar o login na aplicação
-
-## Dúvidas
-Caso tenha alguma dúvida entre em contato pelo e-mail: dias.dsn.cir@alterdata.com.br
