@@ -18,6 +18,7 @@ deixa o código css muito mais limpo e fácil de ler.
 
 ## Estrutura de pastas e arquivos do projeto
 
+```
 ├── README.md
 ├── package.json
 ├── prettier.config.js
@@ -65,23 +66,24 @@ deixa o código css muito mais limpo e fácil de ler.
 │       └── getValidationErros.ts
 ├── tsconfig.json
 └── yarn.lock
+```
 
 ## Exemplos do projeto
 
 #### Tela de login
-![](https://ibb.co/fvcg2xn)
+[!login](https://ibb.co/fvcg2xn)
 
 #### Dashboard da aplicação
-![](https://ibb.co/FYS3GCW)
+[!dashboard](https://ibb.co/FYS3GCW)
 
 #### Cadastro de usuário
-![](https://ibb.co/bgZqfHc)
+[!cadastro_usuario](https://ibb.co/bgZqfHc)
 
 #### Cadastro de tickets
-![](https://ibb.co/ynH8gM2)
+[!cadastro_tickets](https://ibb.co/ynH8gM2)
 
 #### Edição de tickets
-![](https://ibb.co/JsrjvQJ)
+[!edicao_tickets](https://ibb.co/JsrjvQJ)
 
 
 ## Como executar o projeto
