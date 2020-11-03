@@ -71,19 +71,19 @@ deixa o código css muito mais limpo e fácil de ler.
 ## Exemplos do projeto
 
 #### Tela de login
-[!login](https://ibb.co/fvcg2xn)
+![login](https://user-images.githubusercontent.com/55066007/98037323-25e92d00-1dfa-11eb-8d88-1a1797d82a7b.PNG)
 
 #### Dashboard da aplicação
-[!dashboard](https://ibb.co/FYS3GCW)
+![Dashboard](https://user-images.githubusercontent.com/55066007/98037373-37cad000-1dfa-11eb-8acf-e62a3e5593e6.PNG)
 
 #### Cadastro de usuário
-[!cadastro_usuario](https://ibb.co/bgZqfHc)
+![Criar](https://user-images.githubusercontent.com/55066007/98037351-300b2b80-1dfa-11eb-9cb6-08fc7c0167af.PNG)
 
 #### Cadastro de tickets
-[!cadastro_tickets](https://ibb.co/ynH8gM2)
+![CriarTicket](https://user-images.githubusercontent.com/55066007/98037375-37cad000-1dfa-11eb-9d9f-5d762046214d.PNG)
 
 #### Edição de tickets
-[!edicao_tickets](https://ibb.co/JsrjvQJ)
+![Editar](https://user-images.githubusercontent.com/55066007/98037403-42856500-1dfa-11eb-8edf-69bfe32655e8.PNG)
 
 
 ## Como executar o projeto
