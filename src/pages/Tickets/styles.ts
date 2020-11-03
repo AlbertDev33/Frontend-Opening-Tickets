@@ -35,12 +35,15 @@ export const Content = styled.div`
   }
 
   a {
+    display: flex;
+    align-items: center;
     text-decoration: none;
-    color: #312e38;
+    color: #f4f4f4;
     font-weight: 600;
-    padding: 10px;
-    background-color: #6ec4db;
-    border-radius: 10px;
+
+    svg {
+      margin-right: 10px;
+    }
   }
 `;
 
