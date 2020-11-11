@@ -1,4 +1,4 @@
-# Sistama de abertura de tickets
+# Sistema de abertura de tickets
 
 ### Bibliotecas do projeto
 
