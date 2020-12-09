@@ -40,7 +40,7 @@ const ForgotPassword: React.FC = () => {
           abortEarly: false,
         });
 
-        await api.post('/password/forgot', {
+        await api.post<ForgotPasswordFormData>('/password/forgot', {
           email: data.email,
         });
 
