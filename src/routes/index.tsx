@@ -6,6 +6,7 @@ import Route from './Route';
 import Login from '../pages/Login';
 import Register from '../pages/Register';
 import Dashboard from '../pages/Dashboard';
+import Admindashboard from '../pages/Admindashboard';
 import Tickets from '../pages/Tickets';
 import Edit from '../pages/Edit';
 import ForgotPassword from '../pages/ForgotPassword';
@@ -17,6 +18,8 @@ const Routes: React.FC = () => (
     <Route path="/register" component={Register} />
     <Route path="/forgot-password" component={ForgotPassword} />
     <Route path="/reset-password" component={ResetPassword} />
+
+    <Route path="/admin" component={Admindashboard} isAdmin />
 
     <Route path="/dashboard" component={Dashboard} isPrivate />
     <Route path="/tickets" component={Tickets} isPrivate />
