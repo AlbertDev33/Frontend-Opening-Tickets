@@ -7,9 +7,16 @@ interface User {
   email: string;
 }
 
+// interface UserRoles {
+//   id: string;
+//   description: string;
+//   name: string;
+// }
+
 interface AuthState {
   token: string;
   user: User;
+  userRoles: string;
 }
 
 interface LoginCredentials {
@@ -19,6 +26,7 @@ interface LoginCredentials {
 
 interface AuthContextData {
   user: User;
+  userRoles: string;
   logIn(credentials: LoginCredentials): Promise<void>;
   logOut(): void;
 }
@@ -29,13 +37,18 @@ export const AuthContext = createContext<AuthContextData>(
 
 export const AuthProvider: React.FC = ({ children }) => {
   const [data, setData] = useState<AuthState>(() => {
-    const token = localStorage.getItem('@Alterdata:token');
-    const user = localStorage.getItem('@Alterdata:user');
+    const token = localStorage.getItem('@AppTicket:token');
+    const user = localStorage.getItem('@AppTicket:user');
+    const userRoles = localStorage.getItem('@AppTicket:roles');
 
-    if (token && user) {
+    if (token && user && userRoles) {
       api.defaults.headers.authorization = `Bearer ${token}`;
 
-      return { token, user: JSON.parse(user) };
+      return {
+        token,
+        user: JSON.parse(user),
+        userRoles: JSON.parse(userRoles),
+      };
     }
 
     return {} as AuthState;
@@ -47,25 +60,29 @@ export const AuthProvider: React.FC = ({ children }) => {
       password,
     });
 
-    const { token, user } = response.data;
+    const { token, user, userRoles }: AuthState = response.data;
 
-    localStorage.setItem('@Alterdata:token', token);
-    localStorage.setItem('@Alterdata:user', JSON.stringify(user));
+    localStorage.setItem('@AppTicket:token', token);
+    localStorage.setItem('@AppTicket:user', JSON.stringify(user));
+    localStorage.setItem('@AppTicket:roles', JSON.stringify(userRoles));
 
     api.defaults.headers.authorization = `Bearer ${token}`;
 
-    setData({ token, user });
+    setData({ token, user, userRoles });
   }, []);
 
   const logOut = useCallback(() => {
-    localStorage.removeItem('@Alterdata:token');
-    localStorage.removeItem('@Alterdata:user');
+    localStorage.removeItem('@AppTicket:token');
+    localStorage.removeItem('@AppTicket:user');
+    localStorage.removeItem('@AppTicket:roles');
 
     setData({} as AuthState);
   }, []);
 
   return (
-    <AuthContext.Provider value={{ user: data.user, logIn, logOut }}>
+    <AuthContext.Provider
+      value={{ user: data.user, userRoles: data.userRoles, logIn, logOut }}
+    >
       {children}
     </AuthContext.Provider>
   );
