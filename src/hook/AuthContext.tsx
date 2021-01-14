@@ -7,16 +7,9 @@ interface User {
   email: string;
 }
 
-// interface UserRoles {
-//   id: string;
-//   description: string;
-//   name: string;
-// }
-
 interface AuthState {
   token: string;
   user: User;
-  userRoles: string;
 }
 
 interface LoginCredentials {
@@ -26,7 +19,7 @@ interface LoginCredentials {
 
 interface AuthContextData {
   user: User;
-  userRoles: string;
+  token: string;
   logIn(credentials: LoginCredentials): Promise<void>;
   logOut(): void;
 }
@@ -39,49 +32,45 @@ export const AuthProvider: React.FC = ({ children }) => {
   const [data, setData] = useState<AuthState>(() => {
     const token = localStorage.getItem('@AppTicket:token');
     const user = localStorage.getItem('@AppTicket:user');
-    const userRoles = localStorage.getItem('@AppTicket:roles');
 
-    if (token && user && userRoles) {
+    if (token && user) {
       api.defaults.headers.authorization = `Bearer ${token}`;
 
       return {
         token,
         user: JSON.parse(user),
-        userRoles: JSON.parse(userRoles),
       };
     }
 
     return {} as AuthState;
   });
 
-  const logIn = useCallback(async ({ email, password }) => {
-    const response = await api.post('sessions', {
+  const logIn = useCallback(async ({ email, password }: LoginCredentials) => {
+    const response = await api.post<AuthState>('sessions', {
       email,
       password,
     });
 
-    const { token, user, userRoles }: AuthState = response.data;
+    const { token, user } = response.data;
 
     localStorage.setItem('@AppTicket:token', token);
     localStorage.setItem('@AppTicket:user', JSON.stringify(user));
-    localStorage.setItem('@AppTicket:roles', JSON.stringify(userRoles));
 
     api.defaults.headers.authorization = `Bearer ${token}`;
 
-    setData({ token, user, userRoles });
+    setData({ token, user });
   }, []);
 
   const logOut = useCallback(() => {
     localStorage.removeItem('@AppTicket:token');
     localStorage.removeItem('@AppTicket:user');
-    localStorage.removeItem('@AppTicket:roles');
 
     setData({} as AuthState);
   }, []);
 
   return (
     <AuthContext.Provider
-      value={{ user: data.user, userRoles: data.userRoles, logIn, logOut }}
+      value={{ user: data.user, token: data.token, logIn, logOut }}
     >
       {children}
     </AuthContext.Provider>
