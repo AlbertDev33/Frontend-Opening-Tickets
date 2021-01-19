@@ -45,13 +45,13 @@ export const AuthProvider: React.FC = ({ children }) => {
     return {} as AuthState;
   });
 
-  const logIn = useCallback(async ({ email, password }: LoginCredentials) => {
-    const response = await api.post<AuthState>('sessions', {
+  const logIn = useCallback(async ({ email, password }) => {
+    const response = await api.post('sessions', {
       email,
       password,
     });
 
-    const { token, user } = response.data;
+    const { token, user }: AuthState = response.data;
 
     localStorage.setItem('@AppTicket:token', token);
     localStorage.setItem('@AppTicket:user', JSON.stringify(user));
@@ -64,6 +64,7 @@ export const AuthProvider: React.FC = ({ children }) => {
   const logOut = useCallback(() => {
     localStorage.removeItem('@AppTicket:token');
     localStorage.removeItem('@AppTicket:user');
+    localStorage.removeItem('@AppTicket:roles');
 
     setData({} as AuthState);
   }, []);

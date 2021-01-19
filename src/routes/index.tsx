@@ -6,7 +6,7 @@ import Route from './Route';
 import Login from '../pages/Login';
 import Register from '../pages/Register';
 import Dashboard from '../pages/Dashboard';
-import Admindashboard from '../pages/Admindashboard';
+import Admindashboard from '../pages/AdminDashboard';
 import Tickets from '../pages/Tickets';
 import Edit from '../pages/Edit';
 import ForgotPassword from '../pages/ForgotPassword';

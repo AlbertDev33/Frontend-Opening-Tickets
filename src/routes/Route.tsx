@@ -1,4 +1,5 @@
 import React, { useContext } from 'react';
+import jwt from 'jsonwebtoken';
 import {
   RouteProps as ReactRouteProps,
   Route as ReactRoute,
@@ -13,13 +14,20 @@ interface RouteProps extends ReactRouteProps {
   component: React.ComponentType;
 }
 
+interface UserRole {
+  userRoles: string;
+}
+
 const Route: React.FC<RouteProps> = ({
   isPrivate = false,
   isAdmin = false,
   component: Component,
   ...rest
 }) => {
-  const { user, userRoles } = useContext(AuthContext);
+  const { user, token } = useContext(AuthContext);
+
+  const userToken = jwt.decode(token);
+  const role = userToken as UserRole;
 
   // logado/privada/admin
   // true/false/true = ok
@@ -32,7 +40,20 @@ const Route: React.FC<RouteProps> = ({
     <ReactRoute
       {...rest}
       render={({ location }) => {
-        if (userRoles !== 'ROLE_ADMIN') {
+        if (!user && !role) {
+          return isPrivate || isAdmin ? (
+            <Redirect
+              to={{
+                pathname: '/',
+                state: { from: location },
+              }}
+            />
+          ) : (
+            <Component />
+          );
+        }
+
+        if (role.userRoles !== process.env.REACT_APP_ROLE) {
           return isPrivate === !!user ? (
             <Component />
           ) : (
