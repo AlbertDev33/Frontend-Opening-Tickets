@@ -14,9 +14,10 @@ import * as Yup from 'yup';
 import api from '../../services/api';
 
 import {
+  ProfileContainer,
+  ProfileContent,
+  ProfileImage,
   Container,
-  HeaderContainer,
-  Header,
   HeaderContent,
   Content,
   Tickets,
@@ -26,6 +27,8 @@ import Button from '../../components/Button';
 import Input from '../../components/Input';
 import { AuthContext } from '../../hook/AuthContext';
 import getValidationErrors from '../../utils/getValidationErrors';
+
+import profileImage from '../../assets/profile.png';
 
 interface FindTicketData {
   ticket_id: string;
@@ -40,12 +43,6 @@ interface FindFormData {
 const Admindashboard: React.FC = () => {
   const formRef = useRef<FormHandles>(null);
   const { user, logOut } = useContext(AuthContext);
-
-  const [tickets, setTickets] = useState<FindFormData[]>([]);
-  const [ticketId, setTicketId] = useState<FindTicketData>(
-    {} as FindTicketData,
-  );
-  const [display, setDisplay] = useState(true);
 
   const handleLogOut = useCallback(() => {
     logOut();
@@ -71,9 +68,9 @@ const Admindashboard: React.FC = () => {
 
       await api.get<FindFormData>(`tickets/${ticket_id}`);
 
-      setDisplay(false);
+      // setDisplay(false);
 
-      setTicketId({ ticket_id });
+      // setTicketId({ ticket_id });
     } catch (err) {
       if (err instanceof Yup.ValidationError) {
         const error = getValidationErrors(err);
@@ -85,51 +82,31 @@ const Admindashboard: React.FC = () => {
 
   useEffect(() => {
     api.get('/tickets').then(response => {
-      setTickets(response.data);
+      // setTickets(response.data);
     });
   }, []);
 
   return (
     <>
-      <HeaderContainer>
-        <Header>
-          <HeaderContent>
-            <h1> Admin Painel Bem vindo(a) {user.name}</h1>
-            <button type="button" onClick={handleLogOut}>
-              <FiPower size={20} />
-            </button>
-          </HeaderContent>
-        </Header>
-      </HeaderContainer>
       <Container>
+        <ProfileContainer>
+          <HeaderContent>
+            <h1> Administrador: {user.name}</h1>
+          </HeaderContent>
+          <ProfileContent>
+            <ProfileImage>
+              <img src={profileImage} alt="Profile" />
+
+              <span>Seja bem vindo</span>
+              <strong>{user.name}</strong>
+            </ProfileImage>
+          </ProfileContent>
+          <button type="button" onClick={handleLogOut}>
+            <FiPower size={25} />
+          </button>
+        </ProfileContainer>
         <Content>
-          <Form ref={formRef} onSubmit={handleSubmit}>
-            <Input name="ticket_id" placeholder="Digite aqui o id do ticket" />
-
-            <Button type="submit">Pesquisar</Button>
-          </Form>
-
-          <Link to="/tickets">Criar um chamado</Link>
-          <Tickets>
-            {display ? (
-              tickets.map(ticket => (
-                <Link key={ticket.id} to={`/edit/${ticket.id}`}>
-                  <div>
-                    <strong>{ticket.id}</strong>
-                    <p>{ticket.subject}</p>
-                  </div>
-
-                  <FiChevronRight size={20} />
-                </Link>
-              ))
-            ) : (
-              <Link key={ticketId.ticket_id} to={`/edit/${ticketId.ticket_id}`}>
-                <div>
-                  <strong>{ticketId.ticket_id}</strong>
-                </div>
-              </Link>
-            )}
-          </Tickets>
+          <Tickets />
         </Content>
       </Container>
     </>

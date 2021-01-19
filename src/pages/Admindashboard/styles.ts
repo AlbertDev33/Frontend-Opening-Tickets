@@ -1,33 +1,28 @@
 import styled from 'styled-components';
 
-export const HeaderContainer = styled.div`
+export const Container = styled.div`
+  height: 100vh;
   display: flex;
   justify-content: center;
-  background-color: #f1f1f1;
-`;
-
-export const Header = styled.header`
-  display: flex;
-  width: 90vw;
-  height: 100px;
-`;
-
-export const HeaderContent = styled.div`
-  display: flex;
-  width: 100%;
   align-items: center;
+  background-color: #212121;
+`;
 
-  justify-content: space-between;
-
-  h1 {
-    font-size: 18px;
-    color: #312e38;
-    font-weight: 600;
-  }
+export const ProfileContainer = styled.div`
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  height: 100%;
+  width: 16%;
+  background-color: #fff;
+  position: absolute;
+  left: 0;
 
   button {
     border: 0;
+    position: absolute;
     background: transparent;
+    bottom: 30px;
 
     svg {
       color: #312e38;
@@ -40,10 +35,41 @@ export const HeaderContent = styled.div`
   }
 `;
 
-export const Container = styled.div`
-  height: 100vh;
+export const HeaderContent = styled.div`
   display: flex;
+  width: 100%;
+  height: 35px;
+  align-items: center;
   justify-content: center;
+  margin: 0;
+
+  h1 {
+    font-size: 18px;
+    color: #312e38;
+    font-weight: 600;
+    color: #f1f1f1;
+  }
+`;
+
+export const ProfileContent = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  height: 30%;
+`;
+
+export const ProfileImage = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+
+  img {
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+  }
 `;
 
 export const Content = styled.div`
