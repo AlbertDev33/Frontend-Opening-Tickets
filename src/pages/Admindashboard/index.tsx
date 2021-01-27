@@ -21,6 +21,7 @@ import {
   HeaderContent,
   Content,
   Tickets,
+  TicketInformations,
 } from './styles';
 
 import Button from '../../components/Button';
@@ -35,14 +36,13 @@ interface FindTicketData {
 }
 
 interface FindFormData {
-  id: string;
   subject: string;
-  message: string;
 }
 
 const Admindashboard: React.FC = () => {
   const formRef = useRef<FormHandles>(null);
   const { user, logOut } = useContext(AuthContext);
+  const [tickets, setTickets] = useState<FindFormData[]>([]);
 
   const handleLogOut = useCallback(() => {
     logOut();
@@ -82,7 +82,7 @@ const Admindashboard: React.FC = () => {
 
   useEffect(() => {
     api.get('/tickets').then(response => {
-      // setTickets(response.data);
+      setTickets(response.data);
     });
   }, []);
 
@@ -106,7 +106,11 @@ const Admindashboard: React.FC = () => {
           </button>
         </ProfileContainer>
         <Content>
-          <Tickets />
+          <Tickets>
+            <TicketInformations>
+              {tickets.map(ticket => ticket.subject)}
+            </TicketInformations>
+          </Tickets>
         </Content>
       </Container>
     </>
