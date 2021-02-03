@@ -13,19 +13,13 @@ import * as Yup from 'yup';
 
 import api from '../../services/api';
 
-import {
-  ProfileContainer,
-  ProfileContent,
-  ProfileImage,
-  Container,
-  HeaderContent,
-  Content,
-  Tickets,
-  TicketInformations,
-} from './styles';
+import { Container } from './styles';
 
 import Button from '../../components/Button';
 import Input from '../../components/Input';
+import Sidebar from '../../components/Sidebar';
+import Main from '../../components/Main';
+
 import { AuthContext } from '../../hook/AuthContext';
 import getValidationErrors from '../../utils/getValidationErrors';
 
@@ -87,33 +81,10 @@ const Admindashboard: React.FC = () => {
   }, []);
 
   return (
-    <>
-      <Container>
-        <ProfileContainer>
-          <HeaderContent>
-            <h1> Administrador: {user.name}</h1>
-          </HeaderContent>
-          <ProfileContent>
-            <ProfileImage>
-              <img src={profileImage} alt="Profile" />
-
-              <span>Seja bem vindo</span>
-              <strong>{user.name}</strong>
-            </ProfileImage>
-          </ProfileContent>
-          <button type="button" onClick={handleLogOut}>
-            <FiPower size={25} />
-          </button>
-        </ProfileContainer>
-        <Content>
-          <Tickets>
-            <TicketInformations>
-              {tickets.map(ticket => ticket.subject)}
-            </TicketInformations>
-          </Tickets>
-        </Content>
-      </Container>
-    </>
+    <Container>
+      <Sidebar />
+      <Main />
+    </Container>
   );
 };
 
